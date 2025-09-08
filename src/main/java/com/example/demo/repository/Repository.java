@@ -5,6 +5,8 @@ import java.util.List;
 public interface Repository<T> {
     void add(T entity);
 
+    void save(T entity);
+
     void remove(Long id);
 
     T findById(Long id);
