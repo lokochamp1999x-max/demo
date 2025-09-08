@@ -38,7 +38,7 @@ public class InMemoryTaskRepository implements TaskRepository {
     }
 
     @Override
-    public Task findByStatus(Status status) {
+    public Task findByStatus(String status) {
         return storage.values().stream().filter(task -> task.getStatus().equals(status)).findFirst().orElse(null);
     }
 

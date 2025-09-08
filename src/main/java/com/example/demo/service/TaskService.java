@@ -31,4 +31,10 @@ public class TaskService {
     public List<Task> getAll() {
         return taskRepository.findAll();
     }
+    public Task getTaskByUserId(Long userId) {
+        return taskRepository.findByAssigneeId(userId);
+    }
+    public Task getTaskByStatus(String status) {
+        return taskRepository.findByStatus(status);
+    }
 }
