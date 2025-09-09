@@ -4,6 +4,7 @@ import com.example.demo.model.Status;
 import com.example.demo.model.Task;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -38,13 +39,13 @@ public class InMemoryTaskRepository implements TaskRepository {
     }
 
     @Override
-    public Task findByStatus(String status) {
-        return storage.values().stream().filter(task -> task.getStatus().equals(status)).findFirst().orElse(null);
+    public List<Task> findByStatus(String status) {
+        return storage.values().stream().filter(task -> task.getStatus().equals(status)).toList();
     }
 
     @Override
-    public Task findByAssigneeId(Long id) {
+    public List<Task> findByAssigneeId(Long id) {
         return storage.values().stream()
-                .filter(task -> task.getAssignedUserId().equals(id)).findFirst().orElse(null);
+                .filter(task -> task.getAssignedUserId().equals(id)).toList();
     }
 }

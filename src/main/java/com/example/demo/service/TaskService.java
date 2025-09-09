@@ -2,9 +2,11 @@ package com.example.demo.service;
 
 import com.example.demo.model.Task;
 import com.example.demo.repository.TaskRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class TaskService {
     private TaskRepository taskRepository;
 
@@ -31,10 +33,10 @@ public class TaskService {
     public List<Task> getAll() {
         return taskRepository.findAll();
     }
-    public Task getTaskByUserId(Long userId) {
+    public List<Task> getTaskByUserId(Long userId) {
         return taskRepository.findByAssigneeId(userId);
     }
-    public Task getTaskByStatus(String status) {
+    public List<Task> getTaskByStatus(String status) {
         return taskRepository.findByStatus(status);
     }
 }
