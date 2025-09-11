@@ -21,14 +21,14 @@ public class UserController {
     }
 
     @PostMapping
-    public void addUser(@RequestBody User user) {
-        userService.addUser(user);
+    public User addUser(@RequestBody User user) {
+        return userService.saveUser(user);
     }
 
     @PutMapping("/{id}")
-    public void saveUser(@PathVariable Long id, @RequestBody User user) {
+    public User saveUser(@PathVariable Long id, @RequestBody User user) {
         user.setId(id);
-        userService.saveUser(user);
+       return userService.saveUser(user);
     }
 
     @GetMapping

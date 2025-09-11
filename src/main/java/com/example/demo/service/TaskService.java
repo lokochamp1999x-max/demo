@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.model.Status;
 import com.example.demo.model.Task;
 import com.example.demo.repository.TaskRepository;
 import org.springframework.stereotype.Service;
@@ -14,29 +15,25 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    public void add(Task task) {
-        taskRepository.add(task);
-    }
-
-    public void save(Task task) {
-        taskRepository.save(task);
+    public Task save(Task task) {
+       return taskRepository.save(task);
     }
 
     public void delete(Long id) {
-        taskRepository.remove(id);
+        taskRepository.deleteById(id);
     }
 
     public Task get(Long id) {
-        return taskRepository.findById(id);
+        return taskRepository.findById(id).orElse(null);
     }
 
     public List<Task> getAll() {
         return taskRepository.findAll();
     }
     public List<Task> getTaskByUserId(Long userId) {
-        return taskRepository.findByAssigneeId(userId);
+        return taskRepository.findByAssignedUser_Id(userId);
     }
-    public List<Task> getTaskByStatus(String status) {
+    public List<Task> getTaskByStatus(Status status) {
         return taskRepository.findByStatus(status);
     }
 }

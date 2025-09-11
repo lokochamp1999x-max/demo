@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Status;
 import com.example.demo.model.Task;
 import com.example.demo.service.TaskService;
 import lombok.extern.slf4j.Slf4j;
@@ -35,19 +36,19 @@ public class TaskController {
     }
 
     @GetMapping("/status")
-    public List<Task> getTaskByStatus(@RequestBody String status) {
+    public List<Task> getTaskByStatus(@RequestParam Status status) {
         return taskService.getTaskByStatus(status);
     }
 
     @PostMapping
-    public void addTask(@RequestBody Task task) {
-        taskService.add(task);
+    public Task createTask(@RequestBody Task task) {
+        return taskService.save(task);
     }
 
     @PutMapping("/{id}")
-    public void updateTask(@PathVariable Long id, @RequestBody Task task) {
+    public Task updateTask(@PathVariable Long id, @RequestBody Task task) {
         task.setId(id);
-        taskService.save(task);
+        return taskService.save(task);
     }
 
     @DeleteMapping("/{id}")

@@ -15,16 +15,12 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public void addUser(User user) {
-        userRepository.add(user);
-    }
-
     public User getUserById(Long id) {
-        return userRepository.findById(id);
+        return userRepository.findById(id).orElse(null);
     }
 
     public void removeUserById(Long id) {
-        userRepository.remove(id);
+        userRepository.deleteById(id);
     }
 
     public List<User> getAllUsers() {
@@ -32,13 +28,14 @@ public class UserService {
     }
 
     public boolean existsByEmail(String email) {
-       return userRepository.existsByEmail(email);
-    }
-    public void saveUser(User user) {
-        userRepository.save(user);
+        return userRepository.existsByEmail(email);
     }
 
-    public List<User> findUsersByName(String name){
+    public User saveUser(User user) {
+        return userRepository.save(user);
+    }
+
+    public List<User> findUsersByName(String name) {
         return getAllUsers().stream()
                 .filter(user -> user.getName().equals(name))
                 .collect(Collectors.toList());
